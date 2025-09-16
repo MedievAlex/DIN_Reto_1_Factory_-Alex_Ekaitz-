@@ -1,5 +1,5 @@
-CREATE DATABASE dinfactory;
-USE dinFactory;
+CREATE DATABASE din_factory;
+USE din_factory;
 
 CREATE TABLE user (
 	username VARCHAR(20) PRIMARY KEY,
