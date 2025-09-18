@@ -7,6 +7,7 @@ package controller;
 
 import model.DBImplementation;
 import model.ModelDAO;
+import model.User;
 
 public class Controler {
     	/**[DATABASE]**/
