@@ -19,10 +19,10 @@ public class DBImplementation implements ModelDAO {
 	/**[SQL QUERIES]**/
 
 	// USERS
-	final String SQLUSER = "SELECT * FROM user WHERE codUser = ?";
-	final String SQLUSERPSW = "SELECT * FROM user WHERE codUser = ? AND psw = ?";
-	final String SQLTYPE = "SELECT type_u FROM user WHERE codUser = ?";
-	final String SQLINSERTUSER = "INSERT INTO user VALUES (?,?,?,'Client')";
+	final String SQLUSER = "SELECT * FROM User WHERE U_USERNAME = ?";
+	final String SQLUSERPSW = "SELECT * FROM User WHERE U_USERNAME = ? AND U_PASSWORD = ?";
+	final String SQLTYPE = "SELECT type_u FROM User WHERE U_USERNAME = ?";
+	final String SQLINSERTUSER = "INSERT INTO User VALUES (?,?,?,'Client')";
 
 	/**[DATABASE]**/
 
@@ -46,7 +46,7 @@ public class DBImplementation implements ModelDAO {
 		try {
 			// Prepares the SQL query
 			stmt = con.prepareStatement(SQLUSER);
-			stmt.setString(1, user.getCodU());
+			stmt.setString(1, user.getU_username());
 			// Executes the SQL query
 			ResultSet rs = stmt.executeQuery();
 			// If there is any result, the user exists
@@ -74,8 +74,8 @@ public class DBImplementation implements ModelDAO {
 		try {
 			// Prepares the SQL query
 			stmt = con.prepareStatement(SQLUSERPSW);
-			stmt.setString(1, user.getCodU());
-			stmt.setString(2, user.getPassword());
+			stmt.setString(1, user.getU_username());
+			stmt.setString(2, user.getU_password());
 			// Executes the SQL query
 			ResultSet rs = stmt.executeQuery();
 			// If there is any result, the password exists and matches properly
@@ -103,7 +103,7 @@ public class DBImplementation implements ModelDAO {
 		try {
 			// Prepares the SQL query
 			stmt = con.prepareStatement(SQLTYPE);
-			stmt.setString(1, user.getCodU());
+			stmt.setString(1, user.getU_username());
 			// Executes the SQL query
 			ResultSet rs = stmt.executeQuery();
 			// If there is any result, the user exists, and they are an admin
@@ -129,17 +129,17 @@ public class DBImplementation implements ModelDAO {
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLUSER);
-			stmt.setString(1, user.getCodU());
+			stmt.setString(1, user.getU_username());
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				user.setCodU(rs.getString("codUser"));
-				user.setPassword(rs.getString("psw"));
-				user.setUsername(rs.getString("username"));
+				user.setU_username(rs.getString("codUser"));
+				user.setU_password(rs.getString("psw"));
+				user.setU_name(rs.getString("username"));
 
 				if (verifyUserType(user)) {
-					user.setTypeU(TypeU.ADMIN);
+					user.setU_type(UserType.ADMIN);
 				} else {
-					user.setTypeU(TypeU.CLIENT);
+					user.setU_type(UserType.CLIENT);
 				}
 			}
 			rs.close();
@@ -161,9 +161,9 @@ public class DBImplementation implements ModelDAO {
 			this.openConnection();
 			try {
 				stmt = con.prepareStatement(SQLINSERTUSER);
-				stmt.setString(1, user.getCodU());
-				stmt.setString(2, user.getUsername());
-				stmt.setString(3, user.getPassword());
+				stmt.setString(1, user.getU_username());
+				stmt.setString(2, user.getU_name());
+				stmt.setString(3, user.getU_password());
 				if (stmt.executeUpdate()>0) {
 					register = true;
 				}
