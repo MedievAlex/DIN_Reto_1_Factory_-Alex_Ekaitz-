@@ -6,19 +6,24 @@
 package controller;
 
 import model.DBImplementation;
+import model.FichImplementation;
 import model.ModelDAO;
 import model.User;
 
-public class Controler {
-    	/**[DATABASE]**/
-
-	// Prepare the DB Implementation
-	ModelDAO dao = new DBImplementation();
+public class Controller {
+        ModelDAO dao;
+    	
+        public Controller(boolean isDb) {
+            if (isDb) {
+                dao = new DBImplementation();
+            } else {
+                dao = new FichImplementation();
+            }
+        }
 
 	// Creates and starts the windows
 	public void showWindow() {
-		//MainWindow frame = new MainWindow(this);
-		//frame.setVisible(true);
+
 	}
 
 	/**[USERS]**/
