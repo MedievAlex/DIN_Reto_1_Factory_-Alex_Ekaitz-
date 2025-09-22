@@ -5,6 +5,9 @@
  */
 package controller;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import model.DBImplementation;
 import model.FichImplementation;
 import model.ModelDAO;
@@ -22,8 +25,15 @@ public class Controller {
         }
 
 	// Creates and starts the windows
-	public void showWindow() {
+	public void showWindow() throws Exception {
+            /*
+            Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLDocument.fxml"));
 
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.show();
+            */
 	}
 
 	/**[USERS]**/
