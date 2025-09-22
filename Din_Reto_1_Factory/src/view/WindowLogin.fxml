@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLWindowLoginController">
    <children>
       <TitledPane animated="false" layoutY="-3.0" text="LOGIN">
         <content>
@@ -17,13 +17,13 @@
                <children>
                   <BorderPane layoutY="181.0" prefHeight="58.0" prefWidth="346.0">
                      <center>
-                        <Button mnemonicParsing="false" text="LOGIN" BorderPane.alignment="CENTER" />
+                        <Button fx:id="btnLogin" mnemonicParsing="false" text="LOGIN" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
-                  <CheckBox layoutX="184.0" layoutY="156.0" mnemonicParsing="false" text="Base de Datos" />
-                  <CheckBox layoutX="184.0" layoutY="128.0" mnemonicParsing="false" text="Fichero" />
-                  <TextField layoutX="158.0" layoutY="58.0" promptText="NombreDeUsuario" />
-                  <PasswordField layoutX="158.0" layoutY="93.0" promptText="Contraseña" />
+                  <CheckBox fx:id="cbxBaseDeDatos" layoutX="184.0" layoutY="156.0" mnemonicParsing="false" text="Base de Datos" />
+                  <CheckBox fx:id="cbxFichero" layoutX="184.0" layoutY="128.0" mnemonicParsing="false" text="Fichero" />
+                  <TextField fx:id="txtNombreDeUsuario" layoutX="158.0" layoutY="58.0" promptText="NombreDeUsuario" />
+                  <PasswordField fx:id="txtContraseña" layoutX="158.0" layoutY="93.0" promptText="Contraseña" />
                   <Text fx:id="lblNombreDeUsuario" layoutX="33.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de Usuario:" wrappingWidth="110.93670654296875" />
                   <Text fx:id="lblContraseña" layoutX="33.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña:" wrappingWidth="110.93670654296875" />
                </children>
