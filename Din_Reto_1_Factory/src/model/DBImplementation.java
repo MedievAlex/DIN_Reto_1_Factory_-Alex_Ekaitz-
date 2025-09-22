@@ -36,7 +36,7 @@ public class DBImplementation implements ModelDAO {
 
 	/**[USERS]**/
 
-	// Verify that the user exists
+	 // Verifies that the user exists and copies the information
 	@Override
 	public boolean verifyUser(User user) {
 		// Open connection and declare a boolean to check if the user exists
@@ -50,8 +50,16 @@ public class DBImplementation implements ModelDAO {
 			// Executes the SQL query
 			ResultSet rs = stmt.executeQuery();
 			// If there is any result, the user exists
-			if (rs.next()) {
-				exists = true;
+			if (rs.next()) {				
+                                user.setU_username(rs.getString("codUser"));
+				user.setU_password(rs.getString("psw"));
+				user.setU_name(rs.getString("username"));
+
+				if (verifyUserType(user)) {
+					user.setU_type(UserType.ADMIN);
+				} else {
+					user.setU_type(UserType.CLIENT);
+				}                                                                              
 			}
 			// Closes the connection
 			rs.close();
@@ -64,7 +72,7 @@ public class DBImplementation implements ModelDAO {
 		return exists;
 	}
 
-	// Verify that the user and the password matches
+	 // Verifies that the password matches
 	@Override
 	public boolean verifyUserPassword(User user) {
 		// Open connection and declare a boolean to check if the password exists and matches
@@ -121,6 +129,7 @@ public class DBImplementation implements ModelDAO {
 		return admin;
 	}
 
+        /*
 	// Gets users's information
 	public User getUser(User user) {
 		ResultSet rs = null;
@@ -151,29 +160,5 @@ public class DBImplementation implements ModelDAO {
 		}
 		return user;
 	}
-
-	// Registers a new user
-	@Override
-	public boolean registerUser(User user) {
-		boolean register = false;
-
-		if (!verifyUser(user)) {
-			this.openConnection();
-			try {
-				stmt = con.prepareStatement(SQLINSERTUSER);
-				stmt.setString(1, user.getU_username());
-				stmt.setString(2, user.getU_name());
-				stmt.setString(3, user.getU_password());
-				if (stmt.executeUpdate()>0) {
-					register = true;
-				}
-				stmt.close();
-				con.close();
-			} catch (SQLException e) {
-				System.out.println("An error has occurred when attempting to register the user.");
-				e.printStackTrace();
-			}
-		}
-		return register;
-	}
+        */
 }

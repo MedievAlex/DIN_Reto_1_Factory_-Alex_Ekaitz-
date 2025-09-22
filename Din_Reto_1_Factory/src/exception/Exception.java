@@ -9,6 +9,6 @@ package exception;
  *
  * @author 2dami
  */
-public class exception {
+public class Exception {
     
 }

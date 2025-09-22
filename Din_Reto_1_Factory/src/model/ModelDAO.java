@@ -7,13 +7,10 @@ package model;
 
 public interface ModelDAO {
 
-    public boolean verifyUser(User user);
+    public boolean verifyUser(User user); // Verifies that the user exists and copies the information
 
-    public boolean verifyUserPassword(User user);
+    public boolean verifyUserPassword(User user); // Verifies that the password matches
 
-    public boolean verifyUserType(User user);
+    public boolean verifyUserType(User user); // Verify the user type
 
-    public User getUser(User user);
-
-    public boolean registerUser(User user);
 }
