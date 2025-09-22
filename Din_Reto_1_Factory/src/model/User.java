@@ -23,13 +23,6 @@ public class User {
 		this.u_type = UserType.CLIENT;
 	}
 
-	public User(String codU, String username, String password) {
-		this.u_username = codU;
-		this.u_name = "";
-		this.u_password = password;
-		this.u_type = UserType.CLIENT;
-	}
-
 	public User(String codU, String username, String password, UserType typeU) {
 		this.u_username = codU;
 		this.u_name = username;

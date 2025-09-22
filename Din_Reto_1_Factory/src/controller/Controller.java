@@ -27,23 +27,16 @@ public class Controller {
 	}
 
 	/**[USERS]**/
-	public boolean verifyUser(User user) {
+	public boolean verifyUser(User user) { // Verifies that the user exists and copies the information
 		return dao.verifyUser(user);
 	}
 
-	public boolean verifyUserPassword(User user) {
+	public boolean verifyUserPassword(User user) { // Verifies that the password matches
 		return dao.verifyUserPassword(user);
 	}
 
-	public boolean verifyUserType(User user) {
+	public boolean verifyUserType(User user) { // Verify the user type
 		return dao.verifyUserType(user);
 	}
 	
-	public User getUser(User user){
-		return dao.getUser(user);
-	}
-
-	public boolean registerUser(User user) {
-		return dao.registerUser(user);
-	}
 }

@@ -12,27 +12,17 @@ package model;
 public class FichImplementation implements ModelDAO {
 
     @Override
-    public boolean verifyUser(User user) {
+    public boolean verifyUser(User user) { // Verifies that the user exists and copies the information
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean verifyUserPassword(User user) {
+    public boolean verifyUserPassword(User user) { // Verifies that the password matches
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean verifyUserType(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public User getUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean registerUser(User user) {
+    public boolean verifyUserType(User user) { // Verify the user type
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
