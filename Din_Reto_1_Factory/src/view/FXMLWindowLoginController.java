@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -32,6 +33,12 @@ public class FXMLWindowLoginController implements Initializable {
     private Text lblNombreDeUsuario;
     @FXML
     private Text lblContraseña;
+    
+    private Controller controller;
+    
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
 
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");

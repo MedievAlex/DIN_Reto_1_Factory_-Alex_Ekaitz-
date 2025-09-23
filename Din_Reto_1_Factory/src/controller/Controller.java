@@ -1,16 +1,21 @@
 package controller;
 
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import model.DBImplementation;
 import model.FichImplementation;
 import model.ModelDAO;
 import model.User;
+import view.FXMLWindowLoginController;
 
 /**
  * @author Alex Irazola & Ekaitz Campo
  */
 public class Controller {
-
-    ModelDAO dao;
+    private ModelDAO dao = new DBImplementation();
 
     /**
      * Creates one or another Implementation depending the use. If the data will
@@ -18,12 +23,8 @@ public class Controller {
      *
      * @param isDb
      */
-    public Controller(boolean isDb) {
-        if (isDb) {
-            dao = new DBImplementation();
-        } else {
-            dao = new FichImplementation();
-        }
+    public void setDao(boolean isDb) {
+        dao = isDb ? new DBImplementation() : new FichImplementation();
     }
 
     /**
@@ -31,16 +32,18 @@ public class Controller {
      *
      * @exception
      */
-    public void showWindow() throws Exception {
-        /*
-            Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLDocument.fxml"));
+    public void showWindow(Stage stage) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WindowLogin.fxml"));
+    Parent root = loader.load();
 
-            Scene scene = new Scene(root);
+    // Pasar el Controller al FXML si quieres inyección de dependencias
+    FXMLWindowLoginController loginController = loader.getController();
+    loginController.setController(this);
 
-            stage.setScene(scene);
-            stage.show();
-         */
-    }
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+}
 
     /**
      * Verifies if the user exists and if it does it copies all the attributes
