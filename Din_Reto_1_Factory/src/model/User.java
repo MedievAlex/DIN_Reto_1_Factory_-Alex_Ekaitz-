@@ -7,8 +7,9 @@ public class User {
     // Declare variables
 
     private String u_username;
-    private String u_name;
     private String u_password;
+    private String u_name;
+    private String u_lastname;
     private UserType u_type;
 
     /**
@@ -16,8 +17,9 @@ public class User {
      */
     public User() {
         this.u_username = "";
-        this.u_name = "";
         this.u_password = "";
+        this.u_name = "";
+        this.u_lastname = "";
         this.u_type = UserType.UNSET;
     }
 
@@ -30,8 +32,9 @@ public class User {
      */
     public User(String u_username, String u_password) {
         this.u_username = u_username;
-        this.u_name = "";
         this.u_password = u_password;
+        this.u_name = "";
+        this.u_lastname = "";
         this.u_type = UserType.CLIENT;
     }
 
@@ -40,14 +43,16 @@ public class User {
      * information.
      *
      * @param u_username
-     * @param u_name
      * @param u_password
+     * @param u_name
+     * @param u_lastname
      * @param u_type
      */
-    public User(String u_username, String u_name, String u_password, UserType u_type) {
+    public User(String u_username, String u_password, String u_name, String u_lastname, UserType u_type) {
         this.u_username = u_username;
-        this.u_name = u_name;
         this.u_password = u_password;
+        this.u_name = u_name;
+        this.u_lastname = u_lastname;
         this.u_type = u_type;
     }
 
@@ -68,6 +73,24 @@ public class User {
     public void setU_username(String u_username) {
         this.u_username = u_username;
     }
+    
+    /**
+     * Password's getter.
+     * 
+     * @return u_password
+     */
+    public String getU_password() {
+        return u_password;
+    }
+
+    /**
+     * Password's setter.
+     * 
+     * @param u_password 
+     */
+    public void setU_password(String u_password) {
+        this.u_password = u_password;
+    }
 
     /**
      * Name's getter.
@@ -79,30 +102,32 @@ public class User {
     }
 
     /**
-     * Username's setter.
+     * Name's setter.
      * 
      * @param u_name 
      */
     public void setU_name(String u_name) {
         this.u_name = u_name;
     }
-
+    
     /**
-     * Password's getter.
+     * Last name's getter.
      * 
-     * @return u_password
+     * @param u_name 
      */
-    public String getU_password() {
-        return u_password;
+
+    public String getU_lastname() {
+        return u_lastname;
     }
-
+    
     /**
-     * Username's setter.
+     * Last name's setter.
      * 
-     * @param u_password 
+     * @param u_name 
      */
-    public void setU_password(String u_password) {
-        this.u_password = u_password;
+
+    public void setU_lastname(String u_lastname) {
+        this.u_lastname = u_lastname;
     }
 
     /**
@@ -115,7 +140,7 @@ public class User {
     }
 
     /**
-     * Username's setter.
+     * User type's setter.
      * 
      * @param u_type 
      */
@@ -130,6 +155,6 @@ public class User {
      */
     @Override
     public String toString() {
-        return "User [Username: " + u_username + ", Name: " + u_name + ", Password: " + u_password + ", Type: " + u_type + "]";
+        return "User [Username: " + u_username + ", Password: " + u_password  + ", Name: " + u_name + ", Lastname" + u_lastname + ", Type: " + u_type + "]";
     }
 }
