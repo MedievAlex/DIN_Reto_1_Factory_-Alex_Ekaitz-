@@ -1,16 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
+/**
+ * @author Alex Irazola & Ekaitz Campo
+ */
 public interface ModelDAO {
 
-    public boolean verifyUser(User user); // Verifies that the user exists and copies the information
+    /**
+     * Verifies if the user exists and if it does it copies all the attributes
+     * to the object to return it.
+     *
+     * @param user
+     */
+    public User verifyUser(User user); // 
 
+    /**
+     * Verifies that the password matches returning a boolean.
+     *
+     * @param user
+     */
     public boolean verifyUserPassword(User user); // Verifies that the password matches
 
+    /**
+     * Verifies the user's type to see if its an Admin.
+     *
+     * @param user
+     */
     public boolean verifyUserType(User user); // Verify the user type
 
 }
