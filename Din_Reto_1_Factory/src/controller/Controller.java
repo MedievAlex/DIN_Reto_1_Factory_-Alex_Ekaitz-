@@ -1,52 +1,78 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import model.DBImplementation;
 import model.FichImplementation;
 import model.ModelDAO;
 import model.User;
 
+/**
+ * @author Alex Irazola & Ekaitz Campo
+ */
 public class Controller {
-        ModelDAO dao;
-    	
-        public Controller(boolean isDb) {
-            if (isDb) {
-                dao = new DBImplementation();
-            } else {
-                dao = new FichImplementation();
-            }
-        }
 
-	// Creates and starts the windows
-	public void showWindow() throws Exception {
-            /*
-            Parent root = FXMLLoader.load(getClass().getResource("/view/WindowLogin.fxml"));
+    ModelDAO dao;
+
+    /**
+     * Creates one or another Implementation depending the use. If the data will
+     * be used from files or database.
+     *
+     * @param isDb
+     */
+    public Controller(boolean isDb) {
+        if (isDb) {
+            dao = new DBImplementation();
+        } else {
+            dao = new FichImplementation();
+        }
+    }
+
+    /**
+     * Creates and starts the windows.
+     *
+     * @exception
+     */
+    public void showWindow() throws Exception {
+        /*
+            Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLDocument.fxml"));
 
             Scene scene = new Scene(root);
 
             stage.setScene(scene);
             stage.show();
-            */
-	}
+         */
+    }
 
-	/**[USERS]**/
-	public boolean verifyUser(User user) { // Verifies that the user exists and copies the information
-		return dao.verifyUser(user);
-	}
+    /**
+     * Verifies if the user exists and if it does it copies all the attributes
+     * to the object to return it.
+     *
+     * @param user
+     * @return user
+     */
+    public User verifyUser(User user) {
+        return dao.verifyUser(user);
+    }
 
-	public boolean verifyUserPassword(User user) { // Verifies that the password matches
-		return dao.verifyUserPassword(user);
-	}
+    /**
+     * Verifies that the password matches returning a boolean. TRUE if they
+     * match, FALSE if not.
+     *
+     * @param user
+     * @return user
+     */
+    public boolean verifyUserPassword(User user) {
+        return dao.verifyUserPassword(user);
+    }
 
-	public boolean verifyUserType(User user) { // Verify the user type
-		return dao.verifyUserType(user);
-	}
-	
+    /**
+     * Verifies the user's type to see if its an Admin. TRUE if its an admin,
+     * FALSE if not.
+     *
+     * @param user
+     * @return user
+     */
+    public boolean verifyUserType(User user) {
+        return dao.verifyUserType(user);
+    }
+
 }
