@@ -1,71 +1,135 @@
 package model;
 
+/**
+ * @author Alex Irazola & Ekaitz Campo
+ */
 public class User {
-	// Declare variables
-	private String u_username;
-	private String u_name;
-	private String u_password;
-	private UserType u_type;
+    // Declare variables
 
-	// Declare empty constructor
-	public User() {
-		this.u_username = "";
-		this.u_name = "";
-		this.u_password = "";
-		this.u_type = UserType.UNSET;
-	}
+    private String u_username;
+    private String u_name;
+    private String u_password;
+    private UserType u_type;
 
-	// Declare parametrized constructors
-	public User(String codU, String password) {
-		this.u_username = codU;
-		this.u_name = "";
-		this.u_password = password;
-		this.u_type = UserType.CLIENT;
-	}
+    /**
+     * Empty constructor.
+     */
+    public User() {
+        this.u_username = "";
+        this.u_name = "";
+        this.u_password = "";
+        this.u_type = UserType.UNSET;
+    }
 
-	public User(String codU, String username, String password, UserType typeU) {
-		this.u_username = codU;
-		this.u_name = username;
-		this.u_password = password;
-		this.u_type = typeU;
-	}
+    /**
+     * Parametized constructor to create the user with the necessary variables
+     * to verify if it exists.
+     *
+     * @param u_username
+     * @param u_password
+     */
+    public User(String u_username, String u_password) {
+        this.u_username = u_username;
+        this.u_name = "";
+        this.u_password = u_password;
+        this.u_type = UserType.CLIENT;
+    }
 
-	// Declare getters and setters
-	public String getU_username() {
-		return u_username;
-	}
+    /**
+     * Complete parametized constructor to create the user with the full
+     * information.
+     *
+     * @param u_username
+     * @param u_name
+     * @param u_password
+     * @param u_type
+     */
+    public User(String u_username, String u_name, String u_password, UserType u_type) {
+        this.u_username = u_username;
+        this.u_name = u_name;
+        this.u_password = u_password;
+        this.u_type = u_type;
+    }
 
-	public void setU_username(String codU) {
-		this.u_username = codU;
-	}
+    /**
+     * Username's getter.
+     * 
+     * @return u_username
+     */
+    public String getU_username() {
+        return u_username;
+    }
 
-	public String getU_name() {
-		return u_name;
-	}
+    /**
+     * Username's setter.
+     * 
+     * @param u_username 
+     */
+    public void setU_username(String u_username) {
+        this.u_username = u_username;
+    }
 
-	public void setU_name(String username) {
-		this.u_name = username;
-	}
+    /**
+     * Name's getter.
+     * 
+     * @return u_name
+     */
+    public String getU_name() {
+        return u_name;
+    }
 
-	public String getU_password() {
-		return u_password;
-	}
+    /**
+     * Username's setter.
+     * 
+     * @param u_name 
+     */
+    public void setU_name(String u_name) {
+        this.u_name = u_name;
+    }
 
-	public void setU_password(String password) {
-		this.u_password = password;
-	}
+    /**
+     * Password's getter.
+     * 
+     * @return u_password
+     */
+    public String getU_password() {
+        return u_password;
+    }
 
-	public UserType getU_type() {
-		return u_type;
-	}
+    /**
+     * Username's setter.
+     * 
+     * @param u_password 
+     */
+    public void setU_password(String u_password) {
+        this.u_password = u_password;
+    }
 
-	public void setU_type(UserType typeU) {
-		this.u_type = typeU;
-	}
+    /**
+     * User type's getter.
+     * 
+     * @return u_type
+     */
+    public UserType getU_type() {
+        return u_type;
+    }
 
-	// Declare toString
-	@Override
-	public String toString() {
-		return "User [Username: "+u_username+", Name: "+u_name+", Password: "+u_password+", Type: "+u_type+"]";
-	}  
+    /**
+     * Username's setter.
+     * 
+     * @param u_type 
+     */
+    public void setU_type(UserType u_type) {
+        this.u_type = u_type;
+    }
+
+    /**
+     * Method for the use of showing the variables of the object.
+     * 
+     * @return string
+     */
+    @Override
+    public String toString() {
+        return "User [Username: " + u_username + ", Name: " + u_name + ", Password: " + u_password + ", Type: " + u_type + "]";
+    }
 }
