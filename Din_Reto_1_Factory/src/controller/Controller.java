@@ -27,7 +27,7 @@ public class Controller {
 	// Creates and starts the windows
 	public void showWindow() throws Exception {
             /*
-            Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLDocument.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/WindowLogin.fxml"));
 
             Scene scene = new Scene(root);
 
