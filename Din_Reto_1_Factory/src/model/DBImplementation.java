@@ -30,6 +30,7 @@ public class DBImplementation implements ModelDAO {
     final String SQLUSER = "SELECT * FROM User WHERE U_USERNAME = ?";
     final String SQLUSERPSW = "SELECT * FROM User WHERE U_USERNAME = ? AND U_PASSWORD = ?";
     final String SQLTYPE = "SELECT type_u FROM User WHERE U_USERNAME = ?";
+    final String SQLUSERS = "SELECT * FROM User";
 
     /**
      * DBIplementation's constructor declaration.
@@ -58,8 +59,7 @@ public class DBImplementation implements ModelDAO {
     }
 
     /**
-     * Verifies if the user exists and if it does it copies all the attributes
-     * to the object to return it.
+     * Verifies if the user exists and if it does it copies all the attributes to the object to return it.
      *
      * @param user
      * @return user
@@ -100,8 +100,7 @@ public class DBImplementation implements ModelDAO {
     }
 
     /**
-     * Verifies that the password matches returning a boolean. TRUE if they
-     * match, FALSE if not.
+     * Verifies that the password matches returning a boolean. TRUE if they match, FALSE if not.
      *
      * @param user
      * @return exists
@@ -135,8 +134,7 @@ public class DBImplementation implements ModelDAO {
     }
 
     /**
-     * Verifies the user's type to see if its an Admin. TRUE if its an admin,
-     * FALSE if not.
+     * Verifies the user's type to see if its an Admin. TRUE if its an admin, FALSE if not.
      *
      * @param user
      * @return admin
@@ -166,5 +164,37 @@ public class DBImplementation implements ModelDAO {
             e.printStackTrace();
         }
         return admin;
+    }
+
+    /**
+     * Obtains all the users in the database
+     *
+     * @return users
+     */
+    public ArrayList<User> getUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        this.openConnection();
+
+        try {
+            // Prepares the SQL query
+            stmt = con.prepareStatement(SQLTYPE);
+            // Executes the SQL query
+            ResultSet rs = stmt.executeQuery();
+            // Scroll through the results and appends each user to the ArrayList users
+            while (rs.next()) {
+                User user = new User(rs.getString("u_username"), rs.getString("u_password"), rs.getString("u_name"), rs.getString("u_lastname"), UserType.valueOf(rs.getString("u_type").toUpperCase()));
+
+                users.add(user);
+            }
+            // Closes the connection
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("The user couldn't be verified properly.");
+            e.printStackTrace();
+        }
+
+        return users;
     }
 }
