@@ -31,7 +31,7 @@ public class Controller {
     /**
      * Creates and starts the windows.
      *
-     * @exception
+     * @exception IOException
      */
     public void showWindow(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WindowLogin.fxml"));
@@ -77,7 +77,6 @@ public class Controller {
 
     /**
      * Obtains all the users and saves them in a file
-     *
      */
     public void exportUsers() {
         ArrayList<User> usuarios = new DBImplementation().getUsers();
