@@ -9,13 +9,24 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    /**
+     * Creates the controller and calls the method to open the window.
+     *
+     * @param stage
+     * @exception Exception
+     */
     @Override
-public void start(Stage stage) throws Exception {
-    Controller controller = new Controller();
-    controller.showWindow(stage);
-}
+    public void start(Stage stage) throws Exception {
+        Controller controller = new Controller();
+        controller.showWindow(stage);
+    }
 
-    public static void main(String[] args) {     
+    /**
+     * Main.
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
         launch(args);
     }
 }
