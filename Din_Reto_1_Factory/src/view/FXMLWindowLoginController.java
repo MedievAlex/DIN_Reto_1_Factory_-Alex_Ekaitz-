@@ -6,10 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
@@ -69,14 +66,7 @@ public class FXMLWindowLoginController implements Initializable {
      * @exception IOException
      */    
     public void openWindowShow(ActionEvent event, Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WindowShow.fxml"));
-        Parent root = loader.load();
-
-        FXMLWindowLoginController loginController = loader.getController();
-
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        this.controller.openWindowLogin(stage);
     }
 
     /**

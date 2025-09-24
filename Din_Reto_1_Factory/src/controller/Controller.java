@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +21,8 @@ public class Controller {
     private ModelDAO dao = new DBImplementation();
 
     /**
-     * Creates one or another Implementation depending the use. If the data will be used from files or database.
+     * Creates one or another Implementation depending the use. If the data will
+     * be used from files or database.
      *
      * @param isDb
      */
@@ -29,11 +31,11 @@ public class Controller {
     }
 
     /**
-     * Creates and starts the windows.
+     * Creates and starts the login window.
      *
      * @exception IOException
      */
-    public void showWindow(Stage stage) throws IOException {
+    public void openWindowLogin(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WindowLogin.fxml"));
         Parent root = loader.load();
 
@@ -46,7 +48,25 @@ public class Controller {
     }
 
     /**
-     * Verifies if the user exists and if it does it copies all the attributes to the object to return it.
+     * Creates and opens the show window.
+     *
+     * @exception IOException
+     */
+    public void openWindowShow(ActionEvent event, Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WindowShow.fxml"));
+        Parent root = loader.load();
+
+        FXMLWindowLoginController loginController = loader.getController();
+        loginController.setController(this);
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * Verifies if the user exists and if it does it copies all the attributes
+     * to the object to return it.
      *
      * @param user
      * @return user
@@ -56,7 +76,8 @@ public class Controller {
     }
 
     /**
-     * Verifies that the password matches returning a boolean. TRUE if they match, FALSE if not.
+     * Verifies that the password matches returning a boolean. TRUE if they
+     * match, FALSE if not.
      *
      * @param user
      * @return user
@@ -66,7 +87,8 @@ public class Controller {
     }
 
     /**
-     * Verifies the user's type to see if its an Admin. TRUE if its an admin, FALSE if not.
+     * Verifies the user's type to see if its an Admin. TRUE if its an admin,
+     * FALSE if not.
      *
      * @param user
      * @return user

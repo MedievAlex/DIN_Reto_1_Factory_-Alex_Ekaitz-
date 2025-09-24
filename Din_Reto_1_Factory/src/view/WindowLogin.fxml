@@ -13,7 +13,7 @@
    <children>
       <BorderPane layoutY="190.0" prefHeight="58.0" prefWidth="351.0">
          <center>
-            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#openWindowShow" text="LOGIN" BorderPane.alignment="CENTER" />
+            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#openWindowShow" onMouseClicked="#openWindowShow" text="LOGIN" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
       <CheckBox fx:id="cbxBaseDeDatos" layoutX="163.0" layoutY="178.0" mnemonicParsing="false" text="Base de Datos" />

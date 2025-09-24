@@ -18,7 +18,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Controller controller = new Controller();
-        controller.showWindow(stage);
+        controller.openWindowLogin(stage);
     }
 
     /**
