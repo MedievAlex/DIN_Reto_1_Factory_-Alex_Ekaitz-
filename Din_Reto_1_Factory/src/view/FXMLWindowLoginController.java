@@ -41,16 +41,33 @@ public class FXMLWindowLoginController implements Initializable {
     private Text lblTitle;
     @FXML
     private Text lblErrorMessage;
-    
+
+    /**
+     * Sets the controller.
+     *
+     * @param controller
+     */    
     public void setController(Controller controller) {
         this.controller = controller;
     }
 
+    /**
+     * ...
+     *
+     * @param user
+     */
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
        // label.setText("Hello World!");
     }
-    
+
+    /**
+     * Opens the next window where the information will be shown.
+     *
+     * @param event
+     * @param stage
+     * @exception IOException
+     */    
     public void openWindowShow(ActionEvent event, Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WindowShow.fxml"));
         Parent root = loader.load();
@@ -61,7 +78,13 @@ public class FXMLWindowLoginController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-     
+
+    /**
+     * ...
+     *
+     * @param url
+     * @param rb
+     */     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
