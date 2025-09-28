@@ -6,7 +6,7 @@ U_USERNAME VARCHAR(20) PRIMARY KEY,
 U_PASSWORD VARCHAR(20),
 U_NAME VARCHAR(20),
 U_LASTNAME VARCHAR(20),
-U_TYPE ENUM('Client', 'Admin')
+U_TYPE ENUM('CLIENT', 'ADMIN')
 );
 --
 INSERT INTO User
@@ -15,12 +15,12 @@ VALUES (
         "alm",
         "Almendrito",
         "Tostado",
-        "Admin"
+        "ADMIN"
     ),
     (
         "Garbanzo",
         "gar",
         "Garbancito",
         "Cocido",
-        "Client"
+        "CLIENT"
     );

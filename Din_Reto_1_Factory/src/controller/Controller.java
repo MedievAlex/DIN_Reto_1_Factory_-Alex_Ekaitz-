@@ -17,21 +17,30 @@ import view.FXMLWindowLoginController;
  */
 public class Controller {
 
-    private ModelDAO dao = new DBImplementation();
+    private ModelDAO dao;
 
     /**
-     * Creates one or another Implementation depending the use. If the data will be used from files or database.
+     * Constructor del Controller
+     */
+    public Controller() {
+        dao = new DBImplementation();
+        saveUsers();
+    }
+
+    /**
+     * Selecciona la implementación a usar: base de datos o fichero.
      *
-     * @param isDb
+     * @param isDb true si se quiere usar DB, false si se quiere usar fichero
      */
     public void setDao(boolean isDb) {
         dao = isDb ? new DBImplementation() : new FichImplementation();
     }
 
     /**
-     * Creates and starts the windows.
+     * Crea y muestra la ventana de login.
      *
-     * @exception IOException
+     * @param stage
+     * @throws IOException
      */
     public void showWindow(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WindowLogin.fxml"));
@@ -46,39 +55,40 @@ public class Controller {
     }
 
     /**
-     * Verifies if the user exists and if it does it copies all the attributes to the object to return it.
+     * Comprueba si el usuario existe en la fuente de datos.
      *
-     * @param user
-     * @return user
+     * @param username
+     * @return true si existe, false si no
      */
-    public User verifyUser(User user) {
-        return dao.verifyUser(user);
+    public boolean verifyUserExists(String username) {
+        return dao.verifyUserExists(username);
     }
 
     /**
-     * Verifies that the password matches returning a boolean. TRUE if they match, FALSE if not.
+     * Comprueba si la contraseña del usuario es correcta.
      *
-     * @param user
-     * @return user
+     * @param username
+     * @param password
+     * @return true si coincide, false si no
      */
-    public boolean verifyUserPassword(User user) {
-        return dao.verifyUserPassword(user);
+    public boolean verifyUserPassword(String username, String password) {
+        return dao.verifyUserPassword(username, password);
     }
 
     /**
-     * Verifies the user's type to see if its an Admin. TRUE if its an admin, FALSE if not.
+     * Obtiene el usuario completo con todos sus datos y tipo.
      *
-     * @param user
-     * @return user
+     * @param username
+     * @return User
      */
-    public boolean verifyUserType(User user) {
-        return dao.verifyUserType(user);
+    public User getUser(String username) {
+        return dao.getUser(username);
     }
 
     /**
-     * Obtains all the users and saves them in a file
+     * Obtiene todos los usuarios desde la base de datos y los guarda en un fichero.
      */
-    public void exportUsers() {
+    public void saveUsers() {
         ArrayList<User> usuarios = new DBImplementation().getUsers();
         new FichImplementation().saveUsers(usuarios);
     }

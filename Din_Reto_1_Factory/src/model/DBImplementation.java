@@ -8,15 +8,9 @@ import java.util.*;
  */
 public class DBImplementation implements ModelDAO {
 
-    /**
-     * Prepare statement variables.
-     */
     private Connection con;
     private PreparedStatement stmt;
 
-    /**
-     * Prepare SQL Connection's attributes.
-     */
     private ResourceBundle configFile;
     @SuppressWarnings("unused")
     private String driverBD;
@@ -24,17 +18,10 @@ public class DBImplementation implements ModelDAO {
     private String userBD;
     private String passwordBD;
 
-    /**
-     * Prepare SQL queries.
-     */
     final String SQLUSER = "SELECT * FROM User WHERE U_USERNAME = ?";
     final String SQLUSERPSW = "SELECT * FROM User WHERE U_USERNAME = ? AND U_PASSWORD = ?";
-    final String SQLTYPE = "SELECT type_u FROM User WHERE U_USERNAME = ?";
     final String SQLUSERS = "SELECT * FROM User";
 
-    /**
-     * DBIplementation's constructor declaration.
-     */
     public DBImplementation() {
         this.configFile = ResourceBundle.getBundle("model.classConfig");
         this.driverBD = this.configFile.getString("Driver");
@@ -43,158 +30,99 @@ public class DBImplementation implements ModelDAO {
         this.passwordBD = this.configFile.getString("DBPass");
     }
 
-    /**
-     * Opens connection with the database.
-     */
-    private void openConnection() {
-        try {
-            // Try opening the connection
-            con = DriverManager.getConnection(urlBD, this.userBD, this.passwordBD);
-        } catch (SQLException e) {
-            System.out.println("Error when attempting to open the DB.");
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void openConnection() throws SQLException {
+        con = DriverManager.getConnection(urlBD, this.userBD, this.passwordBD);
     }
 
-    /**
-     * Verifies if the user exists and if it does it copies all the attributes to the object to return it.
-     *
-     * @param user
-     * @return user
-     */
     @Override
-    public User verifyUser(User user) {
-        // Open connection and declare a boolean to check if the user exists
+    public boolean verifyUserExists(String username) {
         boolean exists = false;
-        this.openConnection();
-
         try {
-            // Prepares the SQL query
+            openConnection();
             stmt = con.prepareStatement(SQLUSER);
-            stmt.setString(1, user.getU_username());
-            // Executes the SQL query
+            stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
-            // If there is any result, the user exists
-            if (rs.next()) {
-                user.setU_username(rs.getString("codUser"));
-                user.setU_password(rs.getString("psw"));
-                user.setU_name(rs.getString("username"));
-
-                if (verifyUserType(user)) {
-                    user.setU_type(UserType.ADMIN);
-                } else {
-                    user.setU_type(UserType.CLIENT);
-                }
-            }
-            // Closes the connection
+            exists = rs.next();
             rs.close();
             stmt.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("The user couldn't be verified properly.");
-            e.printStackTrace();
-        }
-        return user;
-    }
-
-    /**
-     * Verifies that the password matches returning a boolean. TRUE if they match, FALSE if not.
-     *
-     * @param user
-     * @return exists
-     */
-    @Override
-    public boolean verifyUserPassword(User user) {
-        // Open connection and declare a boolean to check if the password exists and matches
-        boolean exists = false;
-        this.openConnection();
-
-        try {
-            // Prepares the SQL query
-            stmt = con.prepareStatement(SQLUSERPSW);
-            stmt.setString(1, user.getU_username());
-            stmt.setString(2, user.getU_password());
-            // Executes the SQL query
-            ResultSet rs = stmt.executeQuery();
-            // If there is any result, the password exists and matches properly
-            if (rs.next()) {
-                exists = true;
-            }
-            // Closes the connection
-            rs.close();
-            stmt.close();
-            con.close();
-        } catch (SQLException e) {
-            System.out.println("The user couldn't be verified properly.");
+            System.out.println("Error verifying user existence.");
             e.printStackTrace();
         }
         return exists;
     }
 
-    /**
-     * Verifies the user's type to see if its an Admin. TRUE if its an admin, FALSE if not.
-     *
-     * @param user
-     * @return admin
-     */
     @Override
-    public boolean verifyUserType(User user) {
-        // Open connection and declare a boolean to check if the user is an admin
-        boolean admin = false;
-        this.openConnection();
-
+    public boolean verifyUserPassword(String username, String password) {
+        boolean valid = false;
         try {
-            // Prepares the SQL query
-            stmt = con.prepareStatement(SQLTYPE);
-            stmt.setString(1, user.getU_username());
-            // Executes the SQL query
+            openConnection();
+            stmt = con.prepareStatement(SQLUSERPSW);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
-            // If there is any result, the user exists, and they are an admin
-            if (rs.next() && rs.getString(1).equals("Admin")) {
-                admin = true;
-            }
-            // Closes the connection
+            valid = rs.next();
             rs.close();
             stmt.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("The user couldn't be verified properly.");
+            System.out.println("Error verifying user password.");
             e.printStackTrace();
         }
-        return admin;
+        return valid;
     }
 
-    /**
-     * Obtains all the users in the database
-     *
-     * @return users
-     */
-    public ArrayList<User> getUsers() {
-        ArrayList<User> users = new ArrayList<>();
-        this.openConnection();
-
+    @Override
+    public User getUser(String username) {
+        User user = null;
         try {
-            // Prepares the SQL query
-            stmt = con.prepareStatement(SQLTYPE);
-            // Executes the SQL query
+            openConnection();
+            stmt = con.prepareStatement(SQLUSER);
+            stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
-            // Scroll through the results and appends each user to the ArrayList users
-            while (rs.next()) {
-                User user = new User(rs.getString("u_username"), rs.getString("u_password"), rs.getString("u_name"), rs.getString("u_lastname"), UserType.valueOf(rs.getString("u_type").toUpperCase()));
-
-                users.add(user);
+            if (rs.next()) {
+                user = new User(
+                    rs.getString("U_USERNAME"),
+                    rs.getString("U_PASSWORD"),
+                    rs.getString("U_NAME"),
+                    rs.getString("U_LASTNAME"),
+                    UserType.valueOf(rs.getString("U_TYPE"))
+                );
             }
-            // Closes the connection
             rs.close();
             stmt.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("The user couldn't be verified properly.");
+            System.out.println("Error retrieving full user data.");
             e.printStackTrace();
         }
+        return user;
+    }
 
+    public ArrayList<User> getUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        try {
+            openConnection();
+            stmt = con.prepareStatement(SQLUSERS);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                User user = new User(
+                    rs.getString("U_USERNAME"),
+                    rs.getString("U_PASSWORD"),
+                    rs.getString("U_NAME"),
+                    rs.getString("U_LASTNAME"),
+                    UserType.valueOf(rs.getString("U_TYPE"))
+                );
+                users.add(user);
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error retrieving users.");
+            e.printStackTrace();
+        }
         return users;
     }
 }

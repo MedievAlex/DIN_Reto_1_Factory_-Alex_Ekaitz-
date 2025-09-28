@@ -6,25 +6,28 @@ package model;
 public interface ModelDAO {
 
     /**
-     * Verifies if the user exists and if it does it copies all the attributes
-     * to the object to return it.
+     * Verifies if the user exists
      *
-     * @param user
+     * @param username
+     * @return boolean
      */
-    public User verifyUser(User user); // 
+    public boolean verifyUserExists(String username); // 
 
     /**
      * Verifies that the password matches returning a boolean.
      *
-     * @param user
+     * @param username
+     * @param password
+     * @return boolean
      */
-    public boolean verifyUserPassword(User user); // Verifies that the password matches
+    public boolean verifyUserPassword(String username, String password); // Verifies that the password matches
 
     /**
      * Verifies the user's type to see if its an Admin.
      *
-     * @param user
+     * @param username
+     * @return User
      */
-    public boolean verifyUserType(User user); // Verify the user type
+    public User getUser(String username); // Gets the user
 
 }

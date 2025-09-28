@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.User;
 
 /**
  * Controlador de la ventana de Login
@@ -25,19 +26,24 @@ public class FXMLWindowLoginController implements Initializable {
 
     private Controller controller;
 
-    @FXML private ToggleGroup Method;
-    @FXML private Button btnLogin;
-    @FXML private Text lblContraseña;
-    @FXML private Text lblErrorMessage;
-    @FXML private Text lblNombreDeUsuario;
-    @FXML private Text lblTitle;
-    @FXML private RadioButton rbBaseDeDatos;
-    @FXML private RadioButton rbFichero;
-    @FXML private PasswordField txtContraseña;
-    @FXML private TextField txtNombreDeUsuario;
+    @FXML
+    private ToggleGroup Method;
+    @FXML
+    private Button btnLogin;
+    @FXML
+    private Text lblErrorMessage;
+    @FXML
+    private RadioButton rbBaseDeDatos;
+    @FXML
+    private RadioButton rbFichero;
+    @FXML
+    private PasswordField txtContraseña;
+    @FXML
+    private TextField txtNombreDeUsuario;
 
     /**
      * Asigna el controlador principal
+     * @param controller
      */
     public void setController(Controller controller) {
         this.controller = controller;
@@ -48,13 +54,40 @@ public class FXMLWindowLoginController implements Initializable {
      */
     @FXML
     private void openWindowShow(ActionEvent event) {
+        String username = txtNombreDeUsuario.getText().trim();
+        String password = txtContraseña.getText().trim();
+        boolean useDb = rbBaseDeDatos.isSelected();
+
+        controller.setDao(useDb);
+        
+        if (username.isEmpty() || password.isEmpty()) {
+            lblErrorMessage.setText("Rellena todos los campos.");
+            return;
+        }
+
+        if (!controller.verifyUserExists(username)) {
+            lblErrorMessage.setText("Usuario no encontrado.");
+            return;
+        }
+
+        if (!controller.verifyUserPassword(username, password)) {
+            lblErrorMessage.setText("Contraseña incorrecta.");
+            return;
+        }
+
+        User user = controller.getUser(username);
+        if (user == null) {
+            lblErrorMessage.setText("Error al cargar datos del usuario.");
+            return;
+        }
+
         try {
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WindowShow.fxml"));
             Parent root = loader.load();
 
-            FXMLWindowShowController showController = loader.getController();
+            view.FXMLWindowShowController showController = loader.getController();
+            showController.setUser(user);
 
             Scene scene = new Scene(root);
             stage.setScene(scene);

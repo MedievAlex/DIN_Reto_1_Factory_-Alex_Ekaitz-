@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * @author Alex Irazola & Ekaitz Campo
  */
-public class User {
+public class User implements Serializable {
     // Declare variables
 
     private String u_username;
@@ -20,7 +22,7 @@ public class User {
         this.u_password = "";
         this.u_name = "";
         this.u_lastname = "";
-        this.u_type = UserType.UNSET;
+        this.u_type = UserType.CLIENT;
     }
 
     /**
@@ -113,7 +115,7 @@ public class User {
     /**
      * Last name's getter.
      * 
-     * @param u_name 
+     * return u_lastname
      */
 
     public String getU_lastname() {
@@ -123,7 +125,7 @@ public class User {
     /**
      * Last name's setter.
      * 
-     * @param u_name 
+     * @param u_lastname 
      */
 
     public void setU_lastname(String u_lastname) {

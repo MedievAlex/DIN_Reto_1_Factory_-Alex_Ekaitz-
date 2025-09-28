@@ -1,76 +1,124 @@
 package model;
 
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
  * @author Alex Irazola & Ekaitz Campo
  */
 public class FichImplementation implements ModelDAO {
-    File fichUsuarios = new File("Usuarios.obj");
 
-    
-    /**
-     * Verifies if the user exists and if it does it copies all the attributes
-     * to the object to return it.
-     *
-     * @param user
-     * @return user
-     */   
+    private final File fichUsuarios = new File("Usuarios.obj");
+
     @Override
-    public User verifyUser(User user) { // Verifies that the user exists and copies the information
-        ObjectInputStream ois = null; // Lectura
-        boolean encontrado = false;
-        boolean finArchivo = false;
-
+    public boolean verifyUserExists(String username) {
+        boolean exists = false;
         if (fichUsuarios.exists()) {
-            try {
-                ois = new ObjectInputStream(new FileInputStream(fichUsuarios)); // Lectura
-                while (!finArchivo) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichUsuarios))) {
+                while (true) {
                     try {
                         User userDB = (User) ois.readObject();
-                        if (userDB.getU_username().equals(user.getU_username()) && userDB.getU_password().equals(userDB.getU_password())) {
-                            user.setU_username(user.getU_username());
-                            user.setU_name(user.getU_name());
-                            user.setU_password(user.getU_password());
-                            user.setU_type(user.getU_type());
+                        if (userDB.getU_username().equalsIgnoreCase(username)) {
+                            exists = true;
+                            break;
                         }
-                    } catch (EOFException e) { // Fin del archivo alcanzado
-                        finArchivo = true;
+                    } catch (EOFException eof) {
+                        break; // Fin del archivo
                     }
                 }
-                ois.close(); // Lectura (CERRAR)	 
-            } catch (FileNotFoundException e) { // Excepcion no se ha encontrado el Fichero
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
-            } catch (ClassNotFoundException e) { // Excepcion no es de la misma clase o no se ha encontrado
-                e.printStackTrace();
-            } catch (IOException e) { // Excepcion error al acceder al fichero
-                e.printStackTrace();
-            } catch (Exception e) {
-                System.err.println("\n[FATAL ERROR]");
             }
         } else {
-            System.err.println("\n[ERROR] Fichero no encontrado.");
+            System.err.println("[ERROR] Fichero no encontrado.");
+        }
+        return exists;
+    }
+
+    @Override
+    public boolean verifyUserPassword(String username, String password) {
+        boolean valid = false;
+        if (fichUsuarios.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichUsuarios))) {
+                while (true) {
+                    try {
+                        User userDB = (User) ois.readObject();
+                        if (userDB.getU_username().equalsIgnoreCase(username) &&
+                            userDB.getU_password().equals(password)) {
+                            valid = true;
+                            break;
+                        }
+                    } catch (EOFException eof) {
+                        break;
+                    }
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("[ERROR] Fichero no encontrado.");
+        }
+        return valid;
+    }
+
+    /**
+     *
+     * @param username
+     * @return User
+     */
+    @Override
+    public User getUser(String username) {
+        User user = null;
+        if (fichUsuarios.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichUsuarios))) {
+                while (true) {
+                    try {
+                        User userDB = (User) ois.readObject();
+                        if (userDB.getU_username().equalsIgnoreCase(username)) {
+                            user = userDB;
+                            break;
+                        }
+                    } catch (EOFException eof) {
+                        break;
+                    }
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("[ERROR] Fichero no encontrado.");
         }
         return user;
     }
 
-    @Override
-    public boolean verifyUserPassword(User user) { // Verifies that the password matches
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean verifyUserType(User user) { // Verify the user type
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<User> getUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        if (fichUsuarios.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichUsuarios))) {
+                while (true) {
+                    try {
+                        User userDB = (User) ois.readObject();
+                        users.add(userDB);
+                    } catch (EOFException eof) {
+                        break;
+                    }
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("[ERROR] Fichero no encontrado.");
+        }
+        return users;
     }
 
     public void saveUsers(ArrayList<User> users) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichUsuarios))) {
+            for (User user : users) {
+                oos.writeObject(user);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
