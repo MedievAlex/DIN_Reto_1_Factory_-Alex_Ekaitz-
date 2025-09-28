@@ -1,32 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLWindowLoginController">
+<AnchorPane prefHeight="375.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLWindowLoginController">
+    <fx:define>
+        <ToggleGroup fx:id="Method" />
+    </fx:define>
+    
    <children>
-      <BorderPane layoutY="190.0" prefHeight="58.0" prefWidth="351.0">
-         <center>
-            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#openWindowShow" text="LOGIN" BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
-      <CheckBox fx:id="cbxBaseDeDatos" layoutX="163.0" layoutY="178.0" mnemonicParsing="false" text="Base de Datos" />
-      <CheckBox fx:id="cbxFichero" layoutX="163.0" layoutY="152.0" mnemonicParsing="false" text="Fichero" />
-      <TextField fx:id="txtNombreDeUsuario" layoutX="163.0" layoutY="80.0" promptText="NombreDeUsuario" />
-      <PasswordField fx:id="txtContraseña" layoutX="163.0" layoutY="115.0" promptText="Contraseña" />
-      <Text fx:id="lblNombreDeUsuario" layoutX="38.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de Usuario:" wrappingWidth="110.93670654296875" />
-      <Text fx:id="lblContraseña" layoutX="38.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña:" wrappingWidth="110.93670654296875" />
-      <Text fx:id="lblTitle" layoutX="59.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN" textAlignment="CENTER" wrappingWidth="233.33667755126953">
+      <TextField fx:id="txtNombreDeUsuario" layoutX="322.0" layoutY="128.0" prefHeight="25.0" prefWidth="174.0" promptText="Nombre de usuario" />
+
+      <PasswordField fx:id="txtContraseña" layoutX="322.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="Contraseña" />
+
+      <Text fx:id="lblNombreDeUsuario" layoutX="181.0" layoutY="145.0" text="Nombre de Usuario:" />
+
+      <Text fx:id="lblContraseña" layoutX="181.0" layoutY="183.0" text="Contraseña:" />
+
+      <Text fx:id="lblTitle" layoutX="288.0" layoutY="81.0" text="LOGIN" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="lblErrorMessage" layoutX="105.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="141.5999999999999" />
+
+      <Text fx:id="lblErrorMessage" layoutX="224.0" layoutY="340.0" textAlignment="CENTER" wrappingWidth="197.0" />
+
+      <RadioButton fx:id="rbBaseDeDatos" layoutX="224.0" layoutY="221.0" mnemonicParsing="false" selected="true" text="Base de datos" toggleGroup="$Method" />
+
+      <RadioButton fx:id="rbFichero" layoutX="357.0" layoutY="221.0" mnemonicParsing="false" text="Fichero" toggleGroup="$Method" />
+      
+      <Button fx:id="btnLogin" layoutX="275.0" layoutY="269.0" mnemonicParsing="false" onAction="#openWindowShow" prefHeight="32.0" prefWidth="100.0" text="LOGIN" />
    </children>
 </AnchorPane>
