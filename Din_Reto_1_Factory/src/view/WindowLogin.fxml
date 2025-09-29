@@ -9,32 +9,35 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="375.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLWindowLoginController">
+<AnchorPane prefHeight="345.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLWindowLoginController">
     <fx:define>
         <ToggleGroup fx:id="Method" />
     </fx:define>
     
    <children>
-      <TextField fx:id="txtNombreDeUsuario" layoutX="322.0" layoutY="128.0" prefHeight="25.0" prefWidth="174.0" promptText="Nombre de usuario" />
+      <TextField fx:id="txtNombreDeUsuario" layoutX="263.0" layoutY="108.0" prefHeight="25.0" prefWidth="174.0" promptText="Nombre de usuario" />
 
-      <PasswordField fx:id="txtContraseña" layoutX="322.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="Contraseña" />
+      <PasswordField fx:id="txtContraseña" layoutX="263.0" layoutY="146.0" prefHeight="25.0" prefWidth="174.0" promptText="Contraseña" />
 
-      <Text fx:id="lblNombreDeUsuario" layoutX="181.0" layoutY="145.0" text="Nombre de Usuario:" />
+      <Text fx:id="lblNombreDeUsuario" layoutX="122.0" layoutY="125.0" text="Nombre de Usuario:" />
 
-      <Text fx:id="lblContraseña" layoutX="181.0" layoutY="183.0" text="Contraseña:" />
+      <Text fx:id="lblContraseña" layoutX="122.0" layoutY="163.0" text="Contraseña:" />
 
-      <Text fx:id="lblTitle" layoutX="288.0" layoutY="81.0" text="LOGIN" textAlignment="CENTER">
+      <Text fx:id="lblTitle" layoutX="229.0" layoutY="61.0" text="LOGIN" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
 
-      <Text fx:id="lblErrorMessage" layoutX="224.0" layoutY="340.0" textAlignment="CENTER" wrappingWidth="197.0" />
+      <Text fx:id="lblErrorMessage" layoutX="168.0" layoutY="306.0" textAlignment="CENTER" wrappingWidth="197.0" />
 
-      <RadioButton fx:id="rbBaseDeDatos" layoutX="224.0" layoutY="221.0" mnemonicParsing="false" selected="true" text="Base de datos" toggleGroup="$Method" />
+      <RadioButton fx:id="rbBaseDeDatos" layoutX="165.0" layoutY="201.0" mnemonicParsing="false" selected="true" text="Base de datos">
+         <toggleGroup>
+            <ToggleGroup fx:id="Method" />
+         </toggleGroup></RadioButton>
 
-      <RadioButton fx:id="rbFichero" layoutX="357.0" layoutY="221.0" mnemonicParsing="false" text="Fichero" toggleGroup="$Method" />
+      <RadioButton fx:id="rbFichero" layoutX="298.0" layoutY="201.0" mnemonicParsing="false" text="Fichero" toggleGroup="$Method" />
       
-      <Button fx:id="btnLogin" layoutX="275.0" layoutY="269.0" mnemonicParsing="false" onAction="#openWindowShow" prefHeight="32.0" prefWidth="100.0" text="LOGIN" />
+      <Button fx:id="btnLogin" layoutX="216.0" layoutY="238.0" mnemonicParsing="false" onAction="#openWindowShow" prefHeight="32.0" prefWidth="100.0" text="LOGIN" />
    </children>
 </AnchorPane>
