@@ -41,7 +41,7 @@ public class FXMLWindowShowController implements Initializable {
     public void setUser(User user) {
         this.user = user;
 
-        lblNombreDeUsuario.setText(user.getU_name());
+        lblNombreDeUsuario.setText(user.getU_username());
 
         lblNombre.setText(user.getU_name());
         lblApellido.setText(user.getU_lastname());
