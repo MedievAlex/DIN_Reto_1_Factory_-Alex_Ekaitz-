@@ -10,6 +10,12 @@ public class FichImplementation implements ModelDAO {
 
     private final File fichUsuarios = new File("Usuarios.obj");
 
+    /**
+     * Verifica si el usuario dado es correcto.
+     * 
+     * @param username
+     * @return exists
+     */
     @Override
     public boolean verifyUserExists(String username) {
         boolean exists = false;
@@ -35,6 +41,13 @@ public class FichImplementation implements ModelDAO {
         return exists;
     }
 
+    /**
+     * Verifica si la contraseña es correcta dado un usuario.
+     * 
+     * @param username
+     * @param password
+     * @return valid
+     */
     @Override
     public boolean verifyUserPassword(String username, String password) {
         boolean valid = false;
@@ -64,7 +77,7 @@ public class FichImplementation implements ModelDAO {
     /**
      *
      * @param username
-     * @return User
+     * @return user
      */
     @Override
     public User getUser(String username) {
@@ -91,27 +104,11 @@ public class FichImplementation implements ModelDAO {
         return user;
     }
 
-    public ArrayList<User> getUsers() {
-        ArrayList<User> users = new ArrayList<>();
-        if (fichUsuarios.exists()) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichUsuarios))) {
-                while (true) {
-                    try {
-                        User userDB = (User) ois.readObject();
-                        users.add(userDB);
-                    } catch (EOFException eof) {
-                        break;
-                    }
-                }
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.err.println("[ERROR] Fichero no encontrado.");
-        }
-        return users;
-    }
-
+    /**
+     * Obtiene todos los usuarios de la base de datos.
+     * 
+     * @param users
+     */
     public void saveUsers(ArrayList<User> users) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichUsuarios))) {
             for (User user : users) {

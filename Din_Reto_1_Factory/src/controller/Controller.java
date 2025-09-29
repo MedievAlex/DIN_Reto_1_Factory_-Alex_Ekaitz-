@@ -76,7 +76,7 @@ public class Controller {
     }
 
     /**
-     * Obtiene el usuario completo con todos sus datos y tipo.
+     * Obtiene el usuario completo con todos sus datos.
      *
      * @param username
      * @return User

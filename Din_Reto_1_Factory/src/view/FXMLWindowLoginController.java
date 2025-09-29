@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import model.User;
 
 /**
- * Controlador de la ventana de Login
+ * @author Alex Irazola & Ekaitz Campo
  */
 public class FXMLWindowLoginController implements Initializable {
 
@@ -42,8 +42,7 @@ public class FXMLWindowLoginController implements Initializable {
     private TextField txtNombreDeUsuario;
 
     /**
-     * Asigna el controlador principal
-     *
+     * Asigna el controlador principal.
      * @param controller
      */
     public void setController(Controller controller) {
@@ -51,7 +50,7 @@ public class FXMLWindowLoginController implements Initializable {
     }
 
     /**
-     * Método llamado al pulsar el botón LOGIN
+     * Método llamado al pulsar el botón LOGIN.
      */
     @FXML
     private void openWindowShow(ActionEvent event) {

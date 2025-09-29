@@ -37,6 +37,11 @@ public class FXMLWindowShowController implements Initializable {
     @FXML
     private Text lblErrorMessage;
 
+    
+    /**
+     * Asigna el usuario.
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
 
@@ -61,7 +66,12 @@ public class FXMLWindowShowController implements Initializable {
     private void backButton(ActionEvent event) {
 
     }
-
+    
+    /**
+     * Añade los datos al inicializar la ventana.
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

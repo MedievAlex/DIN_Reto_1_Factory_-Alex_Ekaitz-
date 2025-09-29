@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     /**
-     * Creates the controller and calls the method to open the window.
+     * Crea el controlador y llama al método para abrir la ventana de login.
      *
      * @param stage
      * @exception Exception
