@@ -59,7 +59,7 @@ public class FXMLWindowLoginController implements Initializable {
         boolean useDb = rbBaseDeDatos.isSelected();
 
         controller.setDao(useDb);
-        
+
         if (username.isEmpty() || password.isEmpty()) {
             lblErrorMessage.setText("Rellena todos los campos.");
             return;
@@ -84,13 +84,14 @@ public class FXMLWindowLoginController implements Initializable {
         try {
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WindowShow.fxml"));
-            Parent root = loader.load();
-
+            Parent root = loader.load();   
+            
             view.FXMLWindowShowController showController = loader.getController();
             showController.setUser(user);
 
             Scene scene = new Scene(root);
-            stage.setScene(scene);
+            stage.setScene(scene);          
+
             stage.show();
 
         } catch (IOException e) {
@@ -101,6 +102,6 @@ public class FXMLWindowLoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lblErrorMessage.setText("");
+
     }
 }

@@ -16,15 +16,26 @@ import model.User;
 public class FXMLWindowShowController implements Initializable {
 
     private User user;
+
     private Label label;
-    @FXML private Text lblNombreDeUsuario;
-    @FXML private Text lblContraseña;
-    @FXML private Text lblTituloNombre;
-    @FXML private Button btnBack;
-    @FXML private Text lblTituloApellido;
-    @FXML private Text lblTituloContraseña;
-    @FXML private Text lblNombre;
-    @FXML private Text lblApellido;
+    @FXML
+    private Text lblNombreDeUsuario;
+    @FXML
+    private Text lblContraseña;
+    @FXML
+    private Text lblTituloNombre;
+    @FXML
+    private Button btnBack;
+    @FXML
+    private Text lblTituloApellido;
+    @FXML
+    private Text lblTituloContraseña;
+    @FXML
+    private Text lblNombre;
+    @FXML
+    private Text lblApellido;
+    @FXML
+    private Text lblErrorMessage;
 
     
     /**
@@ -33,11 +44,27 @@ public class FXMLWindowShowController implements Initializable {
      */
     public void setUser(User user) {
         this.user = user;
+
+        lblNombreDeUsuario.setText(user.getU_name());
+
+        lblNombre.setText(user.getU_name());
+        lblApellido.setText(user.getU_lastname());
+        
+        switch (user.getU_type()) {
+            case ADMIN:
+                lblTituloContraseña.setVisible(true);
+                lblContraseña.setVisible(true);
+                lblContraseña.setText(user.getU_password());
+                break;
+            case CLIENT:
+                lblTituloContraseña.setVisible(false);
+                lblContraseña.setVisible(false);
+                break;
+        }       
     }
 
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private void backButton(ActionEvent event) {
+
     }
     
     /**
@@ -46,16 +73,7 @@ public class FXMLWindowShowController implements Initializable {
      * @param rb
      */
     @Override
-public void initialize(URL url, ResourceBundle rb) {
-    if (user != null) {
-        lblTituloNombre.setText(user.getU_name());
-        lblNombreDeUsuario.setText(user.getU_username());
-        lblNombre.setText(user.getU_name());
-        lblApellido.setText(user.getU_lastname());
-        lblContraseña.setText(user.getU_password());
-        lblTituloContraseña.setText("Contraseña:");
-        lblTituloApellido.setText("Apellido:");
-    }
-}
+    public void initialize(URL url, ResourceBundle rb) {
 
+    }
 }
