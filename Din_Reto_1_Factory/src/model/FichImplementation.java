@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- * @author Alex Irazola & Ekaitz Campo
+ * @author Alex Irazola, Ekaitz Campo
  */
 public class FichImplementation implements ModelDAO {
 
@@ -75,7 +75,8 @@ public class FichImplementation implements ModelDAO {
     }
 
     /**
-     *
+     * Obtiene el usuario con todos sus datos.
+     * 
      * @param username
      * @return user
      */

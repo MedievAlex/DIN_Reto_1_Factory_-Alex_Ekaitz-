@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * @author Alex Irazola & Ekaitz Campo
+ * @author Alex Irazola, Ekaitz Campo
  */
 public class Main extends Application {
 

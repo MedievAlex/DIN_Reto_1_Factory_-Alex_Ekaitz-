@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 import model.User;
 
 /**
- * @author Alex Irazola & Ekaitz Campo
+ * @author Alex Irazola, Ekaitz Campo
  */
 public class FXMLWindowShowController implements Initializable {
 

@@ -1,7 +1,7 @@
 package model;
 
 /**
- * @author Alex Irazola & Ekaitz Campo
+ * @author Alex Irazola, Ekaitz Campo
  */
 public interface ModelDAO {
 

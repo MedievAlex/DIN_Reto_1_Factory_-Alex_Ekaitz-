@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * @author Alex Irazola & Ekaitz Campo
+ * @author Alex Irazola, Ekaitz Campo
  */
 public class DBImplementation implements ModelDAO {
 

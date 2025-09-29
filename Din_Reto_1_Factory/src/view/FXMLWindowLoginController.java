@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import model.User;
 
 /**
- * @author Alex Irazola & Ekaitz Campo
+ * @author Alex Irazola, Ekaitz Campo
  */
 public class FXMLWindowLoginController implements Initializable {
 

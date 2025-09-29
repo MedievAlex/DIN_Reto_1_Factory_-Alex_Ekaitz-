@@ -13,7 +13,7 @@ import model.User;
 import view.FXMLWindowLoginController;
 
 /**
- * @author Alex Irazola & Ekaitz Campo
+ * @author Alex Irazola, Ekaitz Campo
  */
 public class Controller {
 

@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 
 /**
- * @author Alex Irazola & Ekaitz Campo
+ * @author Alex Irazola, Ekaitz Campo
  */
 public class User implements Serializable {
     // Declare variables
@@ -61,7 +61,7 @@ public class User implements Serializable {
     /**
      * Username's getter.
      * 
-     * @return u_username
+     * @return u_username 
      */
     public String getU_username() {
         return u_username;
