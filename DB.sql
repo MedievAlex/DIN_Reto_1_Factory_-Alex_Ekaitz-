@@ -9,18 +9,5 @@ U_LASTNAME VARCHAR(20),
 U_TYPE ENUM('CLIENT', 'ADMIN')
 );
 --
-INSERT INTO User
-VALUES (
-        "Almendra",
-        "alm",
-        "Almendrito",
-        "Tostado",
-        "ADMIN"
-    ),
-    (
-        "Garbanzo",
-        "gar",
-        "Garbancito",
-        "Cocido",
-        "CLIENT"
-    );
+INSERT INTO User VALUES ( "Almendra", "alm", "Almendrito", "Tostado", "ADMIN"),
+ ("Garbanzo", "gar", "Garbancito", "Cocido", "CLIENT");
