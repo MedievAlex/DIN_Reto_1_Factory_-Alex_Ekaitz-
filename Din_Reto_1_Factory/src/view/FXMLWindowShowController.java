@@ -26,6 +26,11 @@ public class FXMLWindowShowController implements Initializable {
     @FXML private Text lblNombre;
     @FXML private Text lblApellido;
 
+    
+    /**
+     * Asigna el usuario.
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }
@@ -34,7 +39,12 @@ public class FXMLWindowShowController implements Initializable {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
     }
-
+    
+    /**
+     * Añade los datos al inicializar la ventana.
+     * @param url
+     * @param rb
+     */
     @Override
 public void initialize(URL url, ResourceBundle rb) {
     if (user != null) {

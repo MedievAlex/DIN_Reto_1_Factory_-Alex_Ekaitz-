@@ -10,7 +10,7 @@ public class DBImplementation implements ModelDAO {
 
     private Connection con;
     private PreparedStatement stmt;
-
+    private ResultSet rs;
     private ResourceBundle configFile;
     @SuppressWarnings("unused")
     private String driverBD;
@@ -34,6 +34,12 @@ public class DBImplementation implements ModelDAO {
         con = DriverManager.getConnection(urlBD, this.userBD, this.passwordBD);
     }
 
+    /**
+     * Verifica si el usuario dado es correcto.
+     * 
+     * @param username
+     * @return exists
+     */
     @Override
     public boolean verifyUserExists(String username) {
         boolean exists = false;
@@ -41,7 +47,7 @@ public class DBImplementation implements ModelDAO {
             openConnection();
             stmt = con.prepareStatement(SQLUSER);
             stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
             exists = rs.next();
             rs.close();
             stmt.close();
@@ -53,6 +59,13 @@ public class DBImplementation implements ModelDAO {
         return exists;
     }
 
+    /**
+     * Verifica si la contraseña es correcta dado un usuario.
+     * 
+     * @param username
+     * @param password
+     * @return valid
+     */
     @Override
     public boolean verifyUserPassword(String username, String password) {
         boolean valid = false;
@@ -61,7 +74,7 @@ public class DBImplementation implements ModelDAO {
             stmt = con.prepareStatement(SQLUSERPSW);
             stmt.setString(1, username);
             stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
             valid = rs.next();
             rs.close();
             stmt.close();
@@ -72,7 +85,13 @@ public class DBImplementation implements ModelDAO {
         }
         return valid;
     }
-
+    
+    /**
+     * Obtiene el usuario con todos sus datos.
+     * 
+     * @param username
+     * @return user
+     */
     @Override
     public User getUser(String username) {
         User user = null;
@@ -80,7 +99,7 @@ public class DBImplementation implements ModelDAO {
             openConnection();
             stmt = con.prepareStatement(SQLUSER);
             stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
             if (rs.next()) {
                 user = new User(
                     rs.getString("U_USERNAME"),
@@ -99,13 +118,18 @@ public class DBImplementation implements ModelDAO {
         }
         return user;
     }
-
+    
+    /**
+     * Obtiene todos los usuarios de la base de datos.
+     * 
+     * @return users
+     */
     public ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<>();
         try {
             openConnection();
             stmt = con.prepareStatement(SQLUSERS);
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
             while (rs.next()) {
                 User user = new User(
                     rs.getString("U_USERNAME"),

@@ -11,7 +11,7 @@ public interface ModelDAO {
      * @param username
      * @return boolean
      */
-    public boolean verifyUserExists(String username); // 
+    public boolean verifyUserExists(String username); // Verifies that the user exists
 
     /**
      * Verifies that the password matches returning a boolean.
