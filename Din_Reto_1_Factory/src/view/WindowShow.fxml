@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="375.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLWindowShowController">
+<AnchorPane prefHeight="345.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLWindowShowController">
     <children>
         <Text fx:id="lblTituloNombre" layoutX="208.0" layoutY="127.0" text="NOMBRE:" />
         <Text fx:id="lblNombreDeUsuario" layoutX="336.0" layoutY="127.0" text="[USERNAME]" />
