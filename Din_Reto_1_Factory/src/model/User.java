@@ -115,7 +115,7 @@ public class User implements Serializable {
     /**
      * Last name's getter.
      * 
-     * return u_lastname
+     * @return u_lastname
      */
 
     public String getU_lastname() {
