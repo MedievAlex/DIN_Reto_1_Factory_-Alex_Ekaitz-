@@ -2,10 +2,8 @@ package view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import model.User;
@@ -24,8 +22,6 @@ public class FXMLWindowShowController implements Initializable {
     private Text lblContraseña;
     @FXML
     private Text lblTituloNombre;
-    @FXML
-    private Button btnBack;
     @FXML
     private Text lblTituloApellido;
     @FXML
@@ -61,10 +57,6 @@ public class FXMLWindowShowController implements Initializable {
                 lblContraseña.setVisible(false);
                 break;
         }       
-    }
-
-    private void backButton(ActionEvent event) {
-
     }
     
     /**
