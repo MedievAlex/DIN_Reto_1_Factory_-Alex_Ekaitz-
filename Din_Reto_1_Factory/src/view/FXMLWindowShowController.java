@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import model.User;
 
@@ -14,24 +13,16 @@ import model.User;
 public class FXMLWindowShowController implements Initializable {
 
     private User user;
-
-    private Label label;
     @FXML
     private Text lblNombreDeUsuario;
     @FXML
     private Text lblContraseña;
-    @FXML
-    private Text lblTituloNombre;
-    @FXML
-    private Text lblTituloApellido;
     @FXML
     private Text lblTituloContraseña;
     @FXML
     private Text lblNombre;
     @FXML
     private Text lblApellido;
-    @FXML
-    private Text lblErrorMessage;
 
     
     /**

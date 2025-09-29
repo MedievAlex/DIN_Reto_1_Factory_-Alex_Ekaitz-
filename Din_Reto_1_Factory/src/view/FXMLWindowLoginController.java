@@ -27,15 +27,9 @@ public class FXMLWindowLoginController implements Initializable {
     private Controller controller;
 
     @FXML
-    private ToggleGroup Method;
-    @FXML
-    private Button btnLogin;
-    @FXML
     private Text lblErrorMessage;
     @FXML
     private RadioButton rbBaseDeDatos;
-    @FXML
-    private RadioButton rbFichero;
     @FXML
     private PasswordField txtContraseña;
     @FXML
